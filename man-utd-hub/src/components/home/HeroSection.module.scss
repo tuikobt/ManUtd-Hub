@@ -1,0 +1,140 @@
+@import "../../assets/styles/mixins";
+@import "../../assets/styles/_variables.scss";
+
+.hero {
+  width: 100%;
+  max-width: 1400px;
+  padding: 24px 16px 48px; // pt-6 pb-12 px-4
+
+  @include md-up {
+    padding: 24px 24px 48px; // md:px-6
+  }
+}
+
+.hero__card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 2rem; // rounded-[2rem]
+  min-height: 550px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+
+  // Background settings
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.05); // shadow-2xl
+
+  @include md-up {
+    min-height: 650px;
+  }
+}
+
+// Lớp phủ màu đỏ mờ (Gradient Overlay)
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba($color-manutd-red, 0.9),
+    transparent
+  );
+  opacity: 0.6;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 24px; // gap-6
+  max-width: 56rem; // max-w-4xl
+  padding: 48px 24px; // py-12 px-6
+
+  @include md-up {
+    padding: 64px 48px; // md:py-16 md:px-12
+  }
+}
+
+// Badge "Official Fan Community"
+.hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 8px 16px;
+  font-size: 0.75rem; // text-xs
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #fff;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+// Tiêu đề lớn "THEATRE OF DREAMS"
+.hero__title {
+  color: #fff;
+  font-size: 3.75rem; // text-6xl
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  margin: 0;
+
+  @include md-up {
+    font-size: 6rem; // md:text-8xl
+  }
+}
+
+// Hiệu ứng chữ gradient cho từ "DREAMS"
+.hero__title-highlight {
+  color: transparent;
+  background-image: linear-gradient(to right, $color-primary, #fff);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.hero__description {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.125rem; // text-lg
+  font-weight: 500;
+  max-width: 32rem; // max-w-lg
+  line-height: 1.625;
+
+  @include md-up {
+    font-size: 1.25rem; // md:text-xl
+  }
+}
+
+.hero__cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.hero__btn {
+  height: 56px; // h-14
+  padding: 0 32px; // px-8
+  border-radius: 9999px;
+  background-color: #fff;
+  color: $color-manutd-red;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #f3f4f6; // hover:bg-gray-100
+    transform: translateY(-2px);
+  }
+}
