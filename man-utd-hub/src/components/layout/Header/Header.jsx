@@ -3,9 +3,6 @@ import styles from "./Header.module.scss";
 import { IoFootballSharp } from "react-icons/io5";
 import { FaSearch } from "react-icons/fa";
 
-// Lưu ý: Đảm bảo bạn đã nhúng link font Material Symbols trong public/index.html
-// <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined..." rel="stylesheet" />
-
 const Header = () => {
   return (
     <header className={styles.header}>

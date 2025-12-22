@@ -1,0 +1,55 @@
+@import "../../assets/styles/_variables";
+@import "../../assets/styles/_mixins";
+
+.card {
+  background-color: #f9fafb;
+  padding: 32px;
+  border-radius: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  cursor: default;
+
+  &:hover {
+    background-color: $color-manutd-red;
+    color: #fff;
+
+    .card__icon,
+    .card__label {
+      color: #fff;
+    }
+  }
+}
+
+.card--staggered {
+  @media (min-width: 640px) {
+    transform: translateY(3rem);
+  }
+}
+
+.card__icon {
+  font-size: 2.25rem;
+  margin-bottom: 8px;
+  color: $color-manutd-red;
+  transition: color 0.3s;
+}
+
+.card__number {
+  font-size: 3.75rem;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+.card__label {
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #6b7280;
+  transition: color 0.3s;
+}

@@ -1,5 +1,7 @@
 import React from "react";
 import styles from "./HeroSection.module.scss";
+import { MdOutlineVerified } from "react-icons/md";
+import { HiOutlineArrowNarrowDown } from "react-icons/hi";
 
 const HeroSection = () => {
   const bgImage =
@@ -18,12 +20,10 @@ const HeroSection = () => {
         <div className={styles.hero__content}>
           <div style={{ display: "flex", flexWrap: "wrap", gap: "12px" }}>
             <span className={styles.hero__badge}>
-              <span
+              <MdOutlineVerified
                 className="material-symbols-outlined"
                 style={{ fontSize: "14px" }}
-              >
-                verified
-              </span>
+              />
               Official Fan Community
             </span>
           </div>
@@ -41,7 +41,7 @@ const HeroSection = () => {
           <div className={styles.hero__cta}>
             <button className={styles.hero__btn}>
               <span>Explore History</span>
-              <span className="material-symbols-outlined">arrow_downward</span>
+              <HiOutlineArrowNarrowDown className="material-symbols-outlined" />
             </button>
           </div>
         </div>

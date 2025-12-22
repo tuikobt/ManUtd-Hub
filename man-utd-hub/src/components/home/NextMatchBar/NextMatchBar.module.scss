@@ -1,0 +1,147 @@
+@import "../../../assets/styles/mixins";
+@import "../../../assets/styles/_variables";
+
+.matchBar {
+  width: 100%;
+  border-top: 1px solid #f3f4f6;
+  border-bottom: 1px solid #f3f4f6;
+  background-color: #fff;
+}
+
+.matchBar__container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+
+  @include md-up {
+    flex-direction: row;
+    padding: 24px 40px;
+  }
+}
+
+.matchBar__info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.matchBar__icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $color-manutd-red;
+}
+
+.matchBar__label {
+  display: block;
+  font-size: 0.75rem; // text-xs
+  font-weight: 700;
+  color: #6b7280; // text-gray-500
+  text-transform: uppercase;
+  letter-spacing: 0.1em; // tracking-widest
+}
+
+.matchBar__time {
+  display: block;
+  font-size: 1.125rem; // text-lg
+  font-weight: 700;
+  color: $color-text-main;
+}
+
+.matchBar__matchup {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px; // gap-8
+
+  border-top: 1px solid #f3f4f6;
+  padding-top: 16px;
+
+  @include md-up {
+    width: auto;
+    gap: 64px; // md:gap-16
+    border-top: none;
+    padding-top: 0;
+  }
+}
+
+.matchBar__team {
+  text-align: center;
+}
+
+.matchBar__team-name {
+  display: block;
+  font-size: 1.5rem; // text-2xl
+  font-weight: 900;
+  color: $color-text-main;
+
+  &--gray {
+    color: #9ca3af; // text-gray-400 (Cho đội khách)
+  }
+}
+
+.matchBar__team-role {
+  &--primary {
+    display: block;
+    font-size: 0.75rem; // text-xs
+    font-weight: 700;
+    color: #9ca3af; // text-gray-400
+  }
+
+  &--secondary {
+    display: block;
+    font-size: 1rem; // text-xs
+    font-weight: 700;
+    color: #9ca3af; // text-gray-400
+  }
+}
+
+.matchBar__vs {
+  width: 40px; // size-10
+  height: 40px;
+  border-radius: 50%;
+  background-color: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #6b7280;
+}
+
+.matchBar__action {
+  display: none; // Hidden on mobile
+
+  @include md-up {
+    display: block;
+  }
+}
+
+.matchBar__btn {
+  padding: 10px 24px;
+  border-radius: 9999px;
+  border: 1px solid #e5e7eb; // border-gray-200
+  background-color: transparent;
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: $color-text-main;
+
+  &:hover {
+    background-color: $color-manutd-red;
+    color: #fff;
+    border-color: $color-manutd-red;
+  }
+}
