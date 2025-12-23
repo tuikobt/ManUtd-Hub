@@ -1,0 +1,75 @@
+@import "../../../assets/styles/mixins";
+@import "../../../assets/styles/variables";
+
+.card {
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  overflow: hidden;
+  transition: background-color 0.3s;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+
+    .card__image {
+      filter: grayscale(0); // Hover thì hiện màu
+    }
+  }
+}
+
+.card__imageWrapper {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  background-color: #1f2937; // gray-800
+  position: relative;
+}
+
+.card__image {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: top;
+  filter: grayscale(100%); // Mặc định đen trắng
+  transition: all 0.5s;
+  opacity: 0.8;
+}
+
+// Icon người ở giữa (Placeholder nếu ko có ảnh)
+.card__placeholderIcon {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba($color-manutd-red, 0.2);
+
+  span {
+    font-size: 3.75rem; // 6xl
+    opacity: 0.5;
+  }
+}
+
+.card__gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, #000, transparent, transparent);
+}
+
+.card__content {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+}
+
+.card__name {
+  font-size: 1.25rem; // xl
+  font-weight: 700;
+  color: #fff;
+}
+
+.card__desc {
+  font-size: 0.75rem; // xs
+  color: #9ca3af; // gray-400
+}

@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./HistorySection.module.scss";
-import StatCard from "../../common/StatCard";
+import StatCard from "../../common/StatCard/StatCard";
 import { FaChevronUp } from "react-icons/fa";
 import { FaAngleDoubleUp } from "react-icons/fa";
 import { LuTrophy } from "react-icons/lu";
@@ -9,9 +9,9 @@ import { LuTicketCheck } from "react-icons/lu";
 import { LuMedal } from "react-icons/lu";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 
-const HistorySection = () => {
+const HistorySection = ({ id }) => {
   return (
-    <section className={styles.section}>
+    <section id={id} className={`${styles.section} section-scroll-target`}>
       <div className={styles.container}>
         <div className={styles.leftContent}>
           <span className={styles.label}>Club Heritage</span>

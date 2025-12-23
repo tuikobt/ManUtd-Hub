@@ -1,0 +1,265 @@
+@import "../../../assets/styles/mixins";
+@import "../../../assets/styles/variables";
+
+.section {
+  width: 100%;
+  background-color: #121210;
+  color: #fff;
+  padding: 80px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.bgOverlay {
+  position: absolute;
+  inset: 0;
+  opacity: 0.1;
+  pointer-events: none;
+  background-size: cover;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 16px;
+  position: relative;
+  z-index: 10;
+
+  @include md-up {
+    padding: 0 40px;
+  }
+}
+
+/* Header: Title & Nav Buttons */
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 48px;
+
+  @include md-up {
+    flex-direction: row;
+    align-items: flex-end;
+  }
+}
+
+.subTitle {
+  color: $color-primary;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.875rem;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.title {
+  font-size: 1.875rem; // 3xl
+  font-weight: 900;
+
+  @include md-up {
+    font-size: 3rem; // 5xl
+  }
+}
+
+.navBtns {
+  display: flex;
+  gap: 8px;
+}
+
+.navBtn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: #fff;
+    color: #000;
+  }
+}
+
+/* Grid Players */
+.playerGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin-bottom: 80px;
+
+  @include sm-up {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @include lg-up {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Moments Section */
+.momentsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 64px;
+
+  @include md-up {
+    flex-direction: row;
+  }
+}
+
+.momentsLeft {
+  @include md-up {
+    width: 33.333%;
+  }
+}
+
+.momentsRight {
+  @include md-up {
+    width: 66.666%;
+  }
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+
+  @include sm-up {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.momentsTitle {
+  font-size: 1.875rem;
+  font-weight: 900;
+  margin-bottom: 16px;
+}
+
+.momentsDesc {
+  color: #9ca3af;
+  margin-bottom: 24px;
+}
+
+.viewArchiveBtn {
+  color: $color-primary;
+  font-weight: 700;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.2s;
+
+  &:hover {
+    color: #fff;
+  }
+}
+
+/* Community CTA Box */
+.ctaBox {
+  margin-top: 80px;
+  position: relative;
+  border-radius: 2.5rem;
+  overflow: hidden;
+  background-color: $color-manutd-red;
+  text-align: center;
+  padding: 64px 24px;
+}
+
+.ctaBg {
+  position: absolute;
+  inset: 0;
+  opacity: 0.2;
+  background-size: cover;
+  background-position: center;
+  mix-blend-mode: multiply;
+}
+
+.ctaContent {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.ctaIcon {
+  font-size: 3rem;
+  color: $color-primary;
+  margin-bottom: 8px;
+}
+
+.ctaTitle {
+  font-size: 2.25rem;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.025em;
+
+  @include md-up {
+    font-size: 3.75rem;
+  }
+}
+
+.textStroke {
+  color: $color-primary; // Trick tạo chữ rỗng viền
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.185);
+}
+
+.ctaDesc {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.25rem;
+  max-width: 36rem;
+  margin: 0 auto;
+}
+
+.ctaButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 16px;
+
+  @include sm-up {
+    flex-direction: row;
+  }
+}
+
+.btnPrimary {
+  height: 48px;
+  padding: 0 32px;
+  border-radius: 9999px;
+  background-color: #fff;
+  color: $color-manutd-red;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    background-color: #f3f4f6;
+    transform: scale(1.05);
+  }
+}
+
+.btnOutline {
+  height: 48px;
+  padding: 0 32px;
+  border-radius: 9999px;
+  background-color: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+}

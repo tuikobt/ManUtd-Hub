@@ -23,3 +23,11 @@ body {
   margin: 0;
   padding: 0;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+.section-scroll-target {
+  scroll-margin-top: 100px;
+}

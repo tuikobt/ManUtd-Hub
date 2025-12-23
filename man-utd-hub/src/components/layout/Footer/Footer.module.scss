@@ -1,0 +1,160 @@
+@import "../../../assets/styles/mixins";
+@import "../../../assets/styles/variables";
+
+.footer {
+  width: 100%;
+  background-color: #fff;
+  border-top: 1px solid #f3f4f6;
+  padding: 64px 16px;
+  margin-top: auto;
+
+  @include md-up {
+    padding: 64px 40px;
+  }
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+
+  @include md-up {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+/* LEFT COLUMN (Brand) */
+.brandCol {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 20rem;
+}
+
+.brandInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logoBox {
+  width: 32px;
+  height: 32px;
+  border-radius: 0.5rem;
+  background-color: #000;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brandName {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: $color-text-main;
+}
+
+.description {
+  font-size: 0.875rem;
+  line-height: 1.625;
+  color: #6b7280;
+}
+
+.socialLinks {
+  display: flex;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.socialIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4b5563;
+  text-decoration: none;
+  transition: all 0.2s;
+
+  span {
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  &:hover {
+    background-color: $color-manutd-red;
+    color: #fff;
+  }
+}
+
+/* RIGHT COLUMN (Links) */
+.linksWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 64px;
+}
+
+.linkGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.groupTitle {
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #111827;
+}
+
+.linkItem {
+  font-size: 0.875rem;
+  color: #6b7280;
+  text-decoration: none;
+  transition: color 0.2s;
+
+  &:hover {
+    color: $color-manutd-red;
+  }
+}
+
+/* BOTTOM BAR */
+.bottomBar {
+  max-width: 1280px;
+  margin: 64px auto 0;
+  padding-top: 32px;
+  border-top: 1px solid #f3f4f6;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  font-size: 0.75rem;
+  color: #9ca3af;
+
+  @include md-up {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.legalLinks {
+  display: flex;
+  gap: 24px;
+}
+
+.legalLink {
+  color: #9ca3af;
+  text-decoration: none;
+  transition: color 0.2s;
+
+  &:hover {
+    color: $color-manutd-red;
+  }
+}

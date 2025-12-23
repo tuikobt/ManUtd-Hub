@@ -3,12 +3,12 @@ import styles from "./HeroSection.module.scss";
 import { MdOutlineVerified } from "react-icons/md";
 import { HiOutlineArrowNarrowDown } from "react-icons/hi";
 
-const HeroSection = () => {
+const HeroSection = ({ id }) => {
   const bgImage =
     "https://lh3.googleusercontent.com/aida-public/AB6AXuD19NbctbtiVAJuFHQdXCn2fVJmb_P4-pMucfUqIZPrJ4un40Bs0DtUMZw7quIpuAOOFy1shRKiQnZiYPV0WWOu-xloDCGjZaCWbx2nxqumKNwxyOu-62ueZOn-97w4vcY4q1Ko7g902Wy5Ot7MCncAZh3X4GenuflkDqySFvW_AG1Kq7GG4d1U48OSqcv616A_9BbhZsFWT2lksvgOwt1CgLCgIJY8iC-auo12VLCEbt5e2rnzL9anRofIxFenmTKh9o4bN2lXt44";
 
   return (
-    <section className={styles.hero}>
+    <section id={id} className={`${styles.hero} section-scroll-target`}>
       <div
         className={styles.hero__card}
         style={{

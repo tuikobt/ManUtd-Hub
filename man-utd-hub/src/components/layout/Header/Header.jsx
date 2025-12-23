@@ -24,16 +24,16 @@ const Header = () => {
             </a>
 
             <nav className={styles.header__nav}>
-              <a href="#" className={styles["header__nav-link"]}>
+              <a href="#home" className={styles["header__nav-link"]}>
                 Home
               </a>
-              <a href="#" className={styles["header__nav-link"]}>
+              <a href="#history" className={styles["header__nav-link"]}>
                 History
               </a>
-              <a href="#" className={styles["header__nav-link"]}>
+              <a href="#legends" className={styles["header__nav-link"]}>
                 Legends
               </a>
-              <a href="#" className={styles["header__nav-link"]}>
+              <a href="#community" className={styles["header__nav-link"]}>
                 Community
               </a>
             </nav>
