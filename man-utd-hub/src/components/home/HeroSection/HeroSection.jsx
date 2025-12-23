@@ -39,10 +39,10 @@ const HeroSection = ({ id }) => {
           </p>
 
           <div className={styles.hero__cta}>
-            <button className={styles.hero__btn}>
+            <a href="#history" className={styles.hero__btn}>
               <span>Explore History</span>
               <HiOutlineArrowNarrowDown className="material-symbols-outlined" />
-            </button>
+            </a>
           </div>
         </div>
       </div>

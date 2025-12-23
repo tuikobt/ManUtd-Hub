@@ -1,0 +1,377 @@
+@import "../../../assets/styles/mixins";
+@import "../../../assets/styles/variables";
+
+$modal-primary: #f20d0d;
+$modal-bg-light: #f8f5f5;
+$modal-bg-dark: #221010;
+$modal-border-light: #e6dbdb;
+$modal-border-dark: #3e2b2b;
+$text-main-light: #181111;
+$text-sub-light: #8a6060;
+
+/* --- OVERLAY & CONTAINER --- */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  padding: 16px;
+
+  @include md-up {
+    padding: 24px;
+  }
+}
+
+.modalContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 56rem; // max-w-4xl
+  max-height: 90vh;
+  background-color: $modal-bg-light;
+  border-radius: 1rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+/* --- HEADER --- */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid $modal-border-light;
+  background-color: $modal-bg-light;
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+.headerInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.headerIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba($modal-primary, 0.1);
+  color: $modal-primary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  span {
+    font-size: 24px;
+  }
+}
+
+.headerTitle {
+  color: $text-main-light;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.headerSub {
+  font-size: 0.875rem;
+  color: $text-sub-light;
+}
+
+.closeBtn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #f5f0f0;
+  color: $text-main-light;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: $modal-primary;
+    color: #fff;
+  }
+}
+
+/* --- SCROLLABLE BODY --- */
+.body {
+  flex: 1;
+  overflow-y: auto;
+
+  /* Custom Scrollbar */
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: $modal-border-light;
+    border-radius: 20px;
+  }
+}
+
+/* HERO BANNER */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 256px; // h-64
+  background-size: cover;
+  background-position: center;
+
+  @include md-up {
+    height: 320px; // h-80
+  }
+}
+
+.heroContent {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 24px; // p-6
+
+  @include md-up {
+    padding: 40px; // p-10
+  }
+}
+
+.heroBadge {
+  display: inline-block;
+  padding: 4px 12px;
+  margin-bottom: 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #fff;
+  background-color: $modal-primary;
+  border-radius: 9999px;
+}
+
+.heroTitle {
+  color: #fff;
+  font-size: 1.875rem; // text-3xl
+  font-weight: 900;
+  line-height: 1.1;
+
+  @include md-up {
+    font-size: 3rem; // text-5xl
+  }
+}
+
+.heroDesc {
+  margin-top: 8px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.875rem;
+  max-width: 36rem;
+
+  @include md-up {
+    font-size: 1rem;
+  }
+}
+
+/* MAIN CONTENT PADDING */
+.contentWrapper {
+  padding: 32px 24px;
+  max-width: 48rem; // max-w-3xl
+  margin: 0 auto;
+
+  @include md-up {
+    padding: 40px;
+  }
+}
+
+.introText {
+  color: $text-main-light;
+  font-size: 1.125rem; // text-lg
+  font-weight: 500;
+  line-height: 1.625;
+  margin-bottom: 48px;
+}
+
+/* TIMELINE */
+.timelineSection {
+  margin-bottom: 48px;
+}
+
+.sectionTitle {
+  font-size: 1.5rem; // text-2xl
+  font-weight: 700;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: $text-main-light;
+
+  span {
+    color: $modal-primary;
+  }
+}
+
+.timelineGrid {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  column-gap: 16px;
+}
+
+.tlMarkerCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 4px;
+}
+
+.tlIconBox {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: $modal-bg-light;
+  border: 2px solid $modal-border-light;
+  color: $modal-primary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+
+  span {
+    font-size: 18px;
+  }
+}
+
+.tlLine {
+  width: 2px;
+  background-color: $modal-border-light;
+  flex-grow: 1;
+  min-height: 40px;
+}
+
+.tlContentCol {
+  padding-bottom: 32px;
+  padding-top: 4px;
+}
+
+.tlYear {
+  color: $modal-primary;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.tlTitle {
+  color: $text-main-light;
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.tlDesc {
+  color: $text-sub-light;
+  font-size: 1rem;
+  margin-top: 4px;
+  line-height: 1.5;
+}
+
+/* DIVIDER */
+.divider {
+  height: 1px;
+  width: 100%;
+  background-color: $modal-border-light;
+  margin: 40px 0;
+}
+
+/* ERA DETAIL (Sir Alex) */
+.eraHeader {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: $text-main-light;
+}
+
+.eraWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  @include md-up {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+.eraImageCol {
+  width: 100%;
+  flex-shrink: 0;
+
+  @include md-up {
+    width: 33.333%;
+  }
+}
+
+.eraImage {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: 0.5rem;
+  background-size: cover;
+  background-position: center;
+  background-color: #f3f4f6;
+}
+
+.eraCaption {
+  font-size: 0.75rem;
+  color: $text-sub-light;
+  margin-top: 8px;
+  text-align: center;
+  font-style: italic;
+}
+
+.eraTextCol {
+  flex: 1;
+}
+
+.eraPara {
+  color: $text-main-light;
+  font-size: 1rem;
+  line-height: 1.625;
+  margin-bottom: 16px;
+}
+
+.statsBox {
+  background-color: $modal-bg-light;
+  padding: 16px;
+  border-radius: 0.5rem;
+  border-left: 4px solid $modal-primary;
+}
+
+.statsTitle {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: $modal-primary;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.statsList {
+  list-style: none;
+  font-size: 0.875rem;
+  color: $text-main-light;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+}

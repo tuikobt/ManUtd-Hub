@@ -1,6 +1,9 @@
 import React from "react";
 import styles from "./Footer.module.scss";
 import { IoFootballSharp } from "react-icons/io5";
+import { FaTwitter } from "react-icons/fa6";
+import { FaFacebookF } from "react-icons/fa";
+import { FaYoutube } from "react-icons/fa6";
 
 // Data config để code gọn hơn
 const FOOTER_LINKS = [
@@ -41,13 +44,13 @@ const Footer = ({ id }) => {
 
           <div className={styles.socialLinks}>
             <a href="#" className={styles.socialIcon}>
-              <span>TW</span>
+              <FaTwitter />
             </a>
             <a href="#" className={styles.socialIcon}>
-              <span>IG</span>
+              <FaFacebookF />
             </a>
             <a href="#" className={styles.socialIcon}>
-              <span>YT</span>
+              <FaYoutube />
             </a>
           </div>
         </div>

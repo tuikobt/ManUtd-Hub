@@ -9,7 +9,10 @@ import { LuTicketCheck } from "react-icons/lu";
 import { LuMedal } from "react-icons/lu";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 
-const HistorySection = ({ id }) => {
+const HistorySection = ({ id, setIsHistoryModalOpen }) => {
+  const handleReadMore = () => {
+    setIsHistoryModalOpen(true);
+  };
   return (
     <section id={id} className={`${styles.section} section-scroll-target`}>
       <div className={styles.container}>
@@ -57,7 +60,7 @@ const HistorySection = ({ id }) => {
             </div>
           </div>
 
-          <button className={styles.readMoreBtn}>
+          <button className={styles.readMoreBtn} onClick={handleReadMore}>
             Read Full History
             <HiOutlineArrowNarrowRight
               className="material-symbols-outlined"
