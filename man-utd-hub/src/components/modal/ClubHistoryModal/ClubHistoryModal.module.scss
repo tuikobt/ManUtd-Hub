@@ -20,6 +20,7 @@ $text-sub-light: #8a6060;
   background-color: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(4px);
   padding: 16px;
+  animation: fadeIn 0.3s ease-out;
 
   @include md-up {
     padding: 24px;

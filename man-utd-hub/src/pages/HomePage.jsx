@@ -8,9 +8,17 @@ import HistorySection from "../components/home/HistorySection/HistorySection";
 import LegendsSection from "../components/home/LegendsSection/LegendsSection";
 import Footer from "../components/layout/Footer/Footer";
 import ClubHistoryModal from "../components/modal/ClubHistoryModal/ClubHistoryModal";
+import PlayerModal from "../components/modal/PlayerModal/PlayerModal";
 
 const HomePage = () => {
   const [isHistoryModalOpen, setIsHistoryModalOpen] = useState(false);
+  const [isPlayerModalOpen, setIsPlayerModalOpen] = useState(false);
+  const [selectedPlayer, setSelectedPlayer] = useState(null);
+
+  const handlePlayerClick = (player) => {
+    setSelectedPlayer(player);
+    setIsPlayerModalOpen(true);
+  };
 
   return (
     <div className={styles.pageWrapper}>
@@ -26,7 +34,12 @@ const HomePage = () => {
           isOpen={isHistoryModalOpen}
           onClose={() => setIsHistoryModalOpen(false)}
         />
-        <LegendsSection id="legends" />
+        <LegendsSection id="legends" onPlayerClick={handlePlayerClick} />
+        <PlayerModal
+          isOpen={isPlayerModalOpen}
+          onClose={() => setIsPlayerModalOpen(false)}
+          player={selectedPlayer}
+        />
       </main>
       <Footer id="community" />
     </div>

@@ -90,9 +90,10 @@
 /* Grid Players */
 .playerGrid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
   gap: 24px;
   margin-bottom: 80px;
+  width: 100%;
 
   @include sm-up {
     grid-template-columns: repeat(2, 1fr);

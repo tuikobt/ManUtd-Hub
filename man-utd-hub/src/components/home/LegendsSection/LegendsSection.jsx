@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./LegendsSection.module.scss";
 import PlayerCard from "../../common/PlayerCard/PlayerCard";
 import VideoCard from "../../common/VideoCard/VideoCard";
@@ -6,8 +6,51 @@ import { HiArrowNarrowLeft } from "react-icons/hi";
 import { HiArrowNarrowRight } from "react-icons/hi";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import { MdDiversity3 } from "react-icons/md";
+import legendsData from "../../../data/legends.json";
 
-const LegendsSection = ({ id }) => {
+const LegendsSection = ({ id, onPlayerClick }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [cardsToShow, setCardsToShow] = useState(4);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 640) {
+        setCardsToShow(1);
+      } else if (window.innerWidth < 1024) {
+        setCardsToShow(2);
+      } else {
+        setCardsToShow(4);
+      }
+    };
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const nextSlide = () => {
+    setCurrentIndex((prevIndex) => {
+      const maxIndex = legendsData.length - cardsToShow;
+      return prevIndex >= maxIndex ? 0 : prevIndex + 1;
+    });
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prevIndex) => {
+      const maxIndex = legendsData.length - cardsToShow;
+      return prevIndex === 0 ? maxIndex : prevIndex - 1;
+    });
+  };
+
+  const visiblePlayers = legendsData.slice(
+    currentIndex,
+    currentIndex + cardsToShow
+  );
+
+  const handleCardClick = (player) => {
+    onPlayerClick(player);
+  };
+
   return (
     <section id={id} className={`${styles.section} section-scroll-target`}>
       <div
@@ -29,40 +72,27 @@ const LegendsSection = ({ id }) => {
           </div>
           <div className={styles.navBtns}>
             <button className={styles.navBtn}>
-              <HiArrowNarrowLeft size={28} />
+              <HiArrowNarrowLeft size={28} onClick={prevSlide} />
             </button>
             <button className={styles.navBtn}>
-              <HiArrowNarrowRight size={28} />
+              <HiArrowNarrowRight size={28} onClick={nextSlide} />
             </button>
           </div>
         </div>
 
         {/* --- PLAYERS GRID --- */}
         <div className={styles.playerGrid}>
-          <PlayerCard
-            image="https://lh3.googleusercontent.com/aida-public/AB6AXuAgME-Yi-srtRcSx4vQIbkYZxuHNPO2Uut7ju-VxWSSMXOTD97oxfIco1BrPnvwetbH9xGCr-XjQjYsBCvu_4YzMikXRWr_vsOIUHcHVzkyBFMgICZw_HnYHKSPJYis79sNuHse4sKEs207gZGigfsGw-dMxarRcOUFTPv0h03MzX_IXs1w4eUn5r9v2J3fPjn9iaWhZ7HtrsvDc3AFU6J0Rpzklzk6PAFqNm1QRshYYW7ti2L9pixtIhLblSYzax4ZyVXDSjWorhI"
-            name="The King"
-            role="Forward"
-            years="1992-1997"
-          />
-          <PlayerCard
-            hasImage={false} // Demo thẻ không có ảnh
-            name="Sir Bobby"
-            role="Midfield"
-            years="1956-1973"
-          />
-          <PlayerCard
-            hasImage={false}
-            name="Captain Marvel"
-            role="Midfield"
-            years="1981-1994"
-          />
-          <PlayerCard
-            hasImage={false}
-            name="The Welsh Wizard"
-            role="Winger"
-            years="1990-2014"
-          />
+          {visiblePlayers.map((player) => (
+            <div key={player.id} onClick={() => handleCardClick(player)}>
+              <PlayerCard
+                image={player.image_url}
+                name={player.name}
+                role={player.position}
+                years={player.years_active}
+                hasImage={!!player.image_url} // Check if URL exists
+              />
+            </div>
+          ))}
         </div>
 
         {/* --- MOMENTS & VIDEOS --- */}

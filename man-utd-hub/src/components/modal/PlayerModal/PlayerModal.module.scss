@@ -1,0 +1,512 @@
+@import "../../../assets/styles/mixins";
+@import "../../../assets/styles/variables";
+
+// Variables (Light Mode Only)
+$modal-primary: #f20d0d;
+$bg-light: #f8f5f5;
+$text-dark: #181111;
+$text-gray: #6b7280;
+$border-light: #e5e7eb;
+
+/* --- OVERLAY --- */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  padding: 16px;
+
+  // Animation fade in
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* --- MODAL CONTAINER --- */
+.modal {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  height: 100%;
+  max-height: 85vh;
+  background-color: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: slideUp 0.4s ease-out;
+
+  @include md-up {
+    flex-direction: row;
+    max-height: 800px;
+  }
+}
+
+/* --- LEFT PANEL (Hero Image) --- */
+.leftPanel {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  background-color: #111827;
+  flex-shrink: 0;
+  overflow: hidden;
+
+  @include md-up {
+    width: 40%;
+    height: auto;
+  }
+}
+
+.heroImage {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center top;
+  transition: transform 0.7s;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.gradientOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba($modal-primary, 0.9), transparent);
+
+  @include md-up {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  }
+}
+
+.jerseyNumber {
+  position: absolute;
+  bottom: -24px;
+  left: -16px;
+  font-size: 180px;
+  font-weight: 700;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.1);
+  user-select: none;
+  display: none;
+
+  @include md-up {
+    display: block;
+  }
+}
+
+.mobileTitle {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 24px;
+  z-index: 10;
+
+  @include md-up {
+    display: none;
+  }
+
+  h1 {
+    color: #fff;
+    font-size: 1.875rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  p {
+    color: rgba(255, 255, 255, 0.9);
+    background-color: rgba($modal-primary, 0.8);
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.875rem;
+  }
+}
+
+.closeBtnMobile {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 50;
+  padding: 8px;
+  background-color: rgba(0, 0, 0, 0.2);
+  color: #fff;
+  border-radius: 50%;
+  backdrop-filter: blur(4px);
+  border: none;
+  display: flex;
+
+  @include md-up {
+    display: none;
+  }
+}
+
+/* --- RIGHT PANEL (Content) --- */
+.rightPanel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+.closeBtnDesktop {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  z-index: 20;
+  display: none;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: $bg-light;
+  color: $text-gray;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: $modal-primary;
+    color: #fff;
+  }
+
+  @include md-up {
+    display: flex;
+  }
+}
+
+/* --- SCROLL AREA --- */
+.scrollContent {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+  padding-bottom: 80px; // Space for footer
+
+  @include md-up {
+    padding: 40px;
+    padding-bottom: 40px;
+  }
+
+  /* Custom Scrollbar */
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1;
+    border-radius: 20px;
+  }
+}
+
+/* --- HEADER INFO --- */
+.headerInfo {
+  display: none;
+  margin-bottom: 32px;
+
+  @include md-up {
+    display: block;
+  }
+}
+
+.tag {
+  background-color: rgba($modal-primary, 0.1);
+  color: $modal-primary;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  text-transform: uppercase;
+}
+
+.playerNum {
+  color: #9ca3af;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-left: 12px;
+}
+
+.playerName {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1;
+  margin: 8px 0;
+  color: $text-dark;
+}
+
+.playerMeta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: $text-gray;
+  font-size: 1.125rem;
+
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: $modal-primary;
+  }
+}
+
+/* --- TABS --- */
+.tabs {
+  display: flex;
+  border-bottom: 1px solid $border-light;
+  margin-bottom: 32px;
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  z-index: 10;
+  padding-top: 8px;
+}
+
+.tabBtn {
+  padding: 0 4px 16px 4px;
+  margin-right: 32px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: $text-gray;
+  border-bottom: 2px solid transparent;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    color: $text-dark;
+  }
+
+  &.active {
+    color: $modal-primary;
+    border-bottom: 2px solid $modal-primary;
+    font-weight: 700;
+  }
+}
+
+/* --- CONTENT SECTIONS --- */
+.sectionTitle {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: $text-dark;
+
+  span {
+    color: $modal-primary;
+  }
+}
+
+.biography {
+  margin-bottom: 40px;
+  line-height: 1.625;
+  color: #4b5563;
+}
+
+/* Stats Grid */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.statCard {
+  background-color: $bg-light;
+  padding: 20px;
+  border-radius: 0.5rem;
+  border: 1px solid transparent;
+  transition: border-color 0.2s;
+
+  &:hover {
+    border-color: rgba($modal-primary, 0.2);
+  }
+
+  p:first-child {
+    font-size: 0.875rem;
+    color: $text-gray;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  p:last-child {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: $text-dark;
+  }
+
+  &.highlight {
+    background-color: rgba($modal-primary, 0.05);
+    border-color: rgba($modal-primary, 0.1);
+
+    p:last-child {
+      color: $modal-primary;
+    }
+  }
+}
+
+/* Table Style */
+.tableWrapper {
+  overflow-x: auto;
+  border-radius: 0.5rem;
+  border: 1px solid $border-light;
+  margin-bottom: 40px;
+}
+
+.table {
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+  white-space: nowrap;
+
+  th {
+    padding: 12px 16px;
+    background-color: #f9fafb;
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: $text-dark;
+    border-bottom: 1px solid $border-light;
+  }
+
+  td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #f3f4f6;
+    color: #4b5563;
+    font-size: 0.875rem;
+  }
+
+  tr:last-child td {
+    border-bottom: none;
+  }
+
+  .colCenter {
+    text-align: center;
+  }
+  .colRight {
+    text-align: right;
+  }
+
+  .bold {
+    font-weight: 700;
+    color: $text-dark;
+  }
+
+  .rating {
+    background-color: #dcfce7;
+    color: #15803d;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 0.75rem;
+  }
+}
+
+/* Honors List */
+.honorsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+
+  @include md-up {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.honorCard {
+  display: flex;
+  align-items: flex-start;
+  padding: 16px;
+  background-color: #f9fafb;
+  border-radius: 0.75rem;
+  border: 1px solid $border-light;
+  transition: all 0.2s;
+
+  &:hover {
+    border-color: rgba($modal-primary, 0.3);
+    transform: translateY(-2px);
+  }
+}
+
+.honorIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 0.5rem;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 16px;
+  flex-shrink: 0;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.honorCount {
+  display: inline-block;
+  background-color: $modal-primary;
+  color: #fff;
+  font-size: 0.625rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 9999px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.yearTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 8px;
+
+  span {
+    font-size: 0.625rem;
+    font-family: monospace;
+    background-color: #fff;
+    border: 1px solid $border-light;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: $text-gray;
+  }
+}
+
+/* Individual Honor Item */
+.indivItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  background-color: #fff;
+  border: 1px solid $border-light;
+  border-radius: 0.5rem;
+  margin-bottom: 12px;
+}
