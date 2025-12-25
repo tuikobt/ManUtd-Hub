@@ -7,8 +7,14 @@ import { HiArrowNarrowRight } from "react-icons/hi";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import { MdDiversity3 } from "react-icons/md";
 import legendsData from "../../../data/legends.json";
+import videosData from "../../../data/videosData.json";
 
-const LegendsSection = ({ id, onPlayerClick }) => {
+const LegendsSection = ({
+  id,
+  onPlayerClick,
+  onVideoCollectionOpen,
+  onVideoOpen,
+}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [cardsToShow, setCardsToShow] = useState(4);
 
@@ -47,8 +53,22 @@ const LegendsSection = ({ id, onPlayerClick }) => {
     currentIndex + cardsToShow
   );
 
+  const slicedVideos = videosData.videoCollection.slice(0, 2);
+
+  const getYouTubeThumbnail = (videoId) => {
+    return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+  };
+
   const handleCardClick = (player) => {
     onPlayerClick(player);
+  };
+
+  const handleVideoCollectionClick = () => {
+    onVideoCollectionOpen();
+  };
+
+  const handleVideoClick = (video) => {
+    onVideoOpen(video);
   };
 
   return (
@@ -89,7 +109,7 @@ const LegendsSection = ({ id, onPlayerClick }) => {
                 name={player.name}
                 role={player.position}
                 years={player.years_active}
-                hasImage={!!player.image_url} // Check if URL exists
+                hasImage={!!player.image_url}
               />
             </div>
           ))}
@@ -103,23 +123,25 @@ const LegendsSection = ({ id, onPlayerClick }) => {
               Relive the goals that shook the world and the celebrations that
               defined a generation.
             </p>
-            <button className={styles.viewArchiveBtn}>
+            <button
+              className={styles.viewArchiveBtn}
+              onClick={() => handleVideoCollectionClick()}
+            >
               View Archive
               <HiOutlineArrowNarrowRight />
             </button>
           </div>
 
           <div className={styles.momentsRight}>
-            <VideoCard
-              image="https://lh3.googleusercontent.com/aida-public/AB6AXuBlDqWXzvdxcY2lDWgNyj6AJ05pTMvdVnj63k6liREwAKpk6hubWydu0QgvlwbUrCYwAZFtgja22wg3urFFDqXeoFwpvCDXz7u9x4yoqDOS2hotV6hUGiTRGwqLwnatibVRL326l1vJOTndFoBtbo8mvL09kvcchzBzN7_HOrEHnQmwPrQgTY_QyHiFHuJ1OYgSwakovX3fs02FoOvrWw4TU-NE_R17xQ1Yr8uInz3SlE5m23RyZ8L2W96XG-koPpprn7b6CAE_tn4"
-              category="Academy"
-              title="Youth Cup Final Highlights"
-            />
-            <VideoCard
-              image="https://lh3.googleusercontent.com/aida-public/AB6AXuA-lWAlGyFdPIDae5K7MyZsvmtL7qf1x_HxRKnS6m5F_AHEhb_YjCkv8BnFYYCkbqSEpKInq5RSS02HWxXqial9tGYgOQdgkpiU5BMqQ5I-l-H-rL_Lc5J1iEIcW2oaGaIX7dXFsAP4lOhshEXbSZ8GMuGDbklDdo0-EVgD036BoKPNF8w5SGAkWOhA6dUSxhT6sUJLV2DNRCxOPAT1DNoQAi7XeNdh4CMOnmA2irxnFWvjKLR7hCAAAfNBbfRh7lMzvKYZl8SEvL4"
-              category="Training"
-              title="Inside Training: Derby Prep"
-            />
+            {slicedVideos.map((video) => (
+              <div key={video.id} onClick={() => handleVideoClick(video)}>
+                <VideoCard
+                  image={getYouTubeThumbnail(video.id)}
+                  category={video.category}
+                  title={video.title}
+                />
+              </div>
+            ))}
           </div>
         </div>
 

@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import styles from "./PlayerModal.module.scss";
 
-// 1. IMPORT CÁC ICON TĨNH (Dùng cho UI cố định)
 import { IoClose } from "react-icons/io5";
 import { MdOutlinePersonOutline } from "react-icons/md";
 import { SiSimpleanalytics } from "react-icons/si";
 import { LuTrophy } from "react-icons/lu";
 
-// 2. IMPORT CÁC ICON ĐỘNG (Dùng cho dữ liệu từ JSON)
 import {
   MdEmojiEvents,
   MdPublic,

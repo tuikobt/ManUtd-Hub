@@ -58,7 +58,7 @@ const ClubHistoryModal = ({ isOpen, onClose }) => {
             onClick={onClose}
             aria-label="Close"
           >
-            <IoClose />
+            <IoClose size={24} />
           </button>
         </header>
 

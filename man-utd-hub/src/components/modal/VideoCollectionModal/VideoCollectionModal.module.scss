@@ -1,0 +1,507 @@
+@import "../../../assets/styles/mixins";
+@import "../../../assets/styles/variables";
+
+/* --- 1. ĐỊNH NGHĨA BIẾN (Để chắc chắn có màu nếu import lỗi) --- */
+$color-manutd-red: #da291c;
+$modal-bg-light: #fff;
+$modal-bg-dark: #150a0a;
+$text-main: #181111;
+$text-sub: #6b7280;
+$border-color: #e5e7eb;
+
+.activeText {
+  color: $color-manutd-red !important;
+}
+
+/* --- 2. TĂNG Z-INDEX CHO OVERLAY --- */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  padding: 16px;
+
+  // Animation fade in
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  height: 100%;
+  max-height: 90vh;
+  background-color: $modal-bg-light;
+  border-radius: 1rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: slideUp 0.4s ease-out;
+}
+
+/* HEADER */
+.header {
+  padding: 20px 24px;
+  border-bottom: 1px solid $border-color;
+  background-color: #fff;
+  flex-shrink: 0;
+}
+
+.headerTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0; /* Đã fix cứng trong JSX nhưng sửa luôn ở đây cho chuẩn */
+}
+
+.label {
+  background-color: rgba($color-manutd-red, 0.1);
+  color: $color-manutd-red;
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin-bottom: 6px;
+  display: inline-block;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: $text-main;
+  margin: 0;
+  line-height: 1.2;
+
+  @include md-up {
+    font-size: 1.875rem;
+  }
+}
+
+.closeBtn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #f3f4f6;
+  color: $text-sub;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: $color-manutd-red;
+    color: #fff;
+  }
+}
+
+/* CONTENT BODY */
+.body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+  background-color: #f9fafb;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #d1d5db;
+    border-radius: 20px;
+  }
+}
+
+/* --- 3. SỬA LỖI CHỒNG CHÉO Ở ĐÂY (FEATURED) --- */
+.featured {
+  margin-bottom: 40px;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  background-color: #000;
+
+  /* Tạo khung tỷ lệ 16:9 cố định để giữ chỗ */
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio hack */
+}
+
+/* Cả Video và Thumbnail đều phải Absolute để lấp đầy khung cha */
+.videoWrapper,
+.thumbnail {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.videoWrapper iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.thumbnail {
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  z-index: 5;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s;
+  }
+
+  &:hover::before {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+}
+
+.playOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.playBtnLarge {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s;
+
+  .iconCircle {
+    width: 60px;
+    height: 60px;
+    background-color: #fff;
+    color: $color-manutd-red;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.thumbnail:hover .playBtnLarge {
+  transform: scale(1.1);
+}
+
+.featuredInfo {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 30px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.95), transparent);
+  pointer-events: none;
+}
+
+.featTitle {
+  color: #fff;
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+
+  @include md-up {
+    font-size: 2.25rem;
+  }
+}
+
+/* SECTION HEADERS */
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Sửa align-items */
+  margin-bottom: 20px;
+
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: $text-main;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  a {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: $color-manutd-red;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    text-decoration: none;
+  }
+}
+
+/* VIDEO GRID */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin-bottom: 40px;
+
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.videoCard {
+  cursor: pointer;
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: translateY(-4px);
+    .cardTitle {
+      color: $color-manutd-red;
+    }
+  }
+}
+
+.cardThumb {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  margin-bottom: 10px;
+  background-color: #000;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.9;
+    transition: opacity 0.3s;
+  }
+
+  &:hover img {
+    opacity: 0.7;
+  }
+}
+
+.cardDuration {
+  position: absolute;
+  bottom: 6px;
+  right: 6px;
+  background-color: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.playIconSmall {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.2);
+
+  span {
+    font-size: 40px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+  }
+}
+
+.cardThumb:hover .playIconSmall {
+  opacity: 1;
+}
+
+.cardTitle {
+  font-weight: 700;
+  color: $text-main;
+  font-size: 0.95rem;
+  line-height: 1.3;
+  margin-bottom: 4px;
+  transition: color 0.2s;
+}
+
+.cardDesc {
+  font-size: 0.8rem;
+  color: $text-sub;
+}
+
+/* INTERVIEW LIST */
+.interviewGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+
+  @include md-up {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.interviewCard {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  background-color: #fff;
+  border-radius: 0.75rem;
+  border: 1px solid transparent;
+  transition: all 0.2s;
+  cursor: pointer;
+
+  &:hover {
+    border-color: rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+  }
+}
+
+.intThumb {
+  width: 110px;
+  aspect-ratio: 16 / 9;
+  border-radius: 6px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background-color: #000;
+  position: relative;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.intInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  h4 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 4px;
+    color: $text-main;
+  }
+
+  p {
+    font-size: 0.75rem;
+    color: $text-sub;
+    margin-top: auto;
+  }
+}
+
+/* FOOTER */
+.footer {
+  padding: 24px;
+  background-color: #fff;
+  border-top: 1px solid $border-color;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  @include md-up {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.footerCount {
+  font-size: 0.875rem;
+  color: $text-sub;
+  display: none;
+
+  @include md-up {
+    display: block;
+  }
+}
+
+.footerBtns {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+
+  @include md-up {
+    width: auto;
+  }
+}
+
+.btn {
+  flex: 1;
+  padding: 10px 20px;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+
+  @include md-up {
+    flex: none;
+  }
+}
+
+.btnOutline {
+  background-color: #fff;
+  border: 1px solid #d1d5db;
+  color: $text-main;
+
+  &:hover {
+    background-color: #f9fafb;
+  }
+}
+
+.btnPrimary {
+  background-color: $color-manutd-red;
+  color: #fff;
+  box-shadow: 0 4px 6px -1px rgba($color-manutd-red, 0.3);
+
+  &:hover {
+    background-color: #c50a0a;
+  }
+}
