@@ -1,8 +1,21 @@
 import React from "react";
 import styles from "./NextMatchBar.module.scss";
 import { FaRegCalendar } from "react-icons/fa6";
+import { useMatchData } from "../../../hooks/useMatchData";
 
 const NextMatchBar = () => {
+  const { nextMatch, prevMatch, loading } = useMatchData();
+
+  if (loading) {
+    return (
+      <section className={styles.matchBar}>
+        <div style={{ padding: "20px", color: "#da291c", textAlign: "center" }}>
+          Loading match data...
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className={styles.matchBar}>
       <div className={styles.matchBar__container}>
@@ -13,15 +26,19 @@ const NextMatchBar = () => {
           <div>
             <span className={styles.matchBar__label}>Next Match</span>
             <span className={styles.matchBar__time}>
-              Premier League • Sunday 16:30
+              {nextMatch?.league} • {nextMatch?.time}
             </span>
           </div>
         </div>
 
         <div className={styles.matchBar__matchup}>
           <div className={styles.matchBar__team}>
-            <span className={styles["matchBar__team-name"]}>MUN</span>
-            <span className={styles["matchBar__team-role--primary"]}>Home</span>
+            <span className={styles["matchBar__team-name"]}>
+              {nextMatch?.home.name}
+            </span>
+            <span className={styles["matchBar__team-role--primary"]}>
+              {nextMatch?.home.role}
+            </span>
           </div>
 
           <div className={styles.matchBar__vs}>VS</div>
@@ -30,9 +47,11 @@ const NextMatchBar = () => {
             <span
               className={`${styles["matchBar__team-name"]} ${styles["matchBar__team-name--gray"]}`}
             >
-              LIV
+              {nextMatch?.away.name}
             </span>
-            <span className={styles["matchBar__team-role--primary"]}>Away</span>
+            <span className={styles["matchBar__team-role--primary"]}>
+              {nextMatch?.away.role}
+            </span>
           </div>
         </div>
 
@@ -49,23 +68,29 @@ const NextMatchBar = () => {
           <div>
             <span className={styles.matchBar__label}>Previous Match</span>
             <span className={styles.matchBar__time}>
-              Premier League • Sunday 16:30
+              {prevMatch?.league} • {prevMatch?.time}
             </span>
           </div>
         </div>
 
         <div className={styles.matchBar__matchup}>
           <div className={styles.matchBar__team}>
-            <span className={styles["matchBar__team-name"]}>3</span>
-            <span className={styles["matchBar__team-role--secondary"]}>MU</span>
+            <span className={styles["matchBar__team-name"]}>
+              {prevMatch?.home.score}
+            </span>
+            <span className={styles["matchBar__team-role--secondary"]}>
+              {prevMatch?.home.name}
+            </span>
           </div>
 
           <div className={styles.matchBar__vs}>:</div>
 
           <div className={styles.matchBar__team}>
-            <span className={styles["matchBar__team-name"]}>1</span>
+            <span className={styles["matchBar__team-name"]}>
+              {prevMatch?.away.score}
+            </span>
             <span className={styles["matchBar__team-role--secondary"]}>
-              TOT
+              {prevMatch?.away.name}
             </span>
           </div>
         </div>
