@@ -48,8 +48,7 @@ export const useMatchData = () => {
     }
 
     const finishedGames = games.filter((g) => g.status === "FT");
-    const prevRaw =
-      finishedGames.length > 0 ? finishedGames[finishedGames.length - 1] : null;
+    const prevRaw = finishedGames.length > 0 ? finishedGames[0] : null;
 
     let prevMatch = null;
     if (prevRaw) {

@@ -43,7 +43,7 @@ const HomePage = () => {
       <Header />
       <main className={styles.mainContent}>
         <HeroSection id="hero" />
-        {/* <NextMatchBar /> */}
+        <NextMatchBar />
         <HistorySection
           id="history"
           setIsHistoryModalOpen={setIsHistoryModalOpen}

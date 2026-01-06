@@ -9,7 +9,15 @@ const NextMatchBar = () => {
   if (loading) {
     return (
       <section className={styles.matchBar}>
-        <div style={{ padding: "20px", color: "#da291c", textAlign: "center" }}>
+        <div
+          style={{
+            padding: "20px",
+            color: "#da291c",
+            textAlign: "center",
+            fontSize: "16px",
+            fontWeight: "500",
+          }}
+        >
           Loading match data...
         </div>
       </section>
